@@ -1,0 +1,30 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Installments {
+  id            String @id @default(uuid())
+  paymentNumber Int
+  totalAmount   Float
+  totalPayments Int
+}
+
+model Transaction {
+  amount    Float?
+  cardId    String?
+  category  EnumTransactionCategory[]
+  date      DateTime?
+  id        String                    @id @default(uuid())
+  name      String?
+  notes     String?
+  typeField String?
+}
+
+enum EnumTransactionCategory {
+  Option1
+}
